@@ -24,9 +24,9 @@ export default function App() {
     const summary = `This ICON panel features insights from ${speakers.join(", ")}.`;
 
     const keywords = [
-      "client", "closing", "leads", "buyers", "sellers", "team", "culture",
-      "ICON", "eXp", "referral", "listing", "mentor", "freedom", "collaboration",
-      "broker", "brand", "support", "value", "opportunity", "community"
+      "love", "joined", "eXp", "why I joined", "favorite thing", "community",
+      "culture", "ICON", "collaboration", "freedom", "support", "growth",
+      "brand", "team", "agent success", "resources", "broker support"
     ];
 
     const scored = quotes.map(q => {
