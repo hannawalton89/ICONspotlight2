@@ -1,19 +1,76 @@
+import React, { useState } from 'react';
+
 export default function App() {
+  const [transcript, setTranscript] = useState("");
+  const [output, setOutput] = useState("");
+
+  const handleGenerate = () => {
+    const lines = transcript.split("\n");
+    const quotes = lines
+      .filter(line => line.includes(":"))
+      .map(line => {
+        const [name, content] = line.split(":");
+        return `💬 ${name.trim()}: "${content.trim()}"`;
+      });
+
+    const speakers = [...new Set(lines.map(line => line.split(":")[0]))].filter(Boolean);
+    const summary = `This ICON panel features insights from ${speakers.join(", ")}.`;
+
+    setOutput(`${summary}\n\n${quotes.join("\n")}`);
+  };
+
   return (
-    <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+    <div style={{ maxWidth: '800px', margin: '0 auto', padding: '2rem', fontFamily: 'Arial, sans-serif' }}>
       <h1 style={{ fontSize: '2rem', fontWeight: 'bold', textAlign: 'center' }}>ICONSpotlight</h1>
       <p style={{ textAlign: 'center', color: '#555' }}>
-        Turn your ICON panel transcript into Canva-ready content and social media highlights.
+        Paste your ICON panel transcript below and generate quotes and summaries automatically.
       </p>
+
       <textarea
-        rows="14"
-        defaultValue={`Amanda: I’m Amanda. I hit ICON by working expired listings.\nJason: I’m Jason. ICON 3 years running. Systems and consistency did it.`}
-        style={{ width: '100%', padding: '1rem', marginTop: '1rem', fontFamily: 'monospace' }}
+        value={transcript}
+        onChange={(e) => setTranscript(e.target.value)}
+        placeholder="Paste ICON panel transcript here..."
+        rows={12}
+        style={{ width: "100%", padding: "1rem", fontFamily: "monospace", marginTop: "1rem" }}
       />
-      <p style={{ marginTop: '2rem', fontStyle: 'italic', color: '#666' }}>
-        This is a simplified preview of the ICONSpotlight prototype. Full version includes photo uploads,
-        quote cards, AI summary, and Canva export integration.
-      </p>
+
+      <button
+        onClick={handleGenerate}
+        style={{
+          backgroundColor: "#2563eb",
+          color: "white",
+          padding: "12px 20px",
+          borderRadius: "6px",
+          marginTop: "1rem",
+          cursor: "pointer",
+          border: "none"
+        }}
+      >
+        Generate Quotes & Summary
+      </button>
+
+      <pre style={{ whiteSpace: "pre-wrap", background: "#f4f4f4", padding: "1rem", marginTop: "1rem" }}>
+        {output}
+      </pre>
     </div>
   );
 }
+git add .
+git commit -m "Added transcript processing and summary generation"
+git push origin main
+git config --global user.name "hannawalton89"
+git config --global user.email "mrshannawalton@gmail.com"
+git add .
+git commit -m "Added transcript parsing and summary generation"
+git push origin main
+git config --global user.name "hannawalton89"
+git config --global user.email "mrshannawalton@gmail.com"
+git config --global user.email "mrshannawalton@gmail.com
+git config --global user.name "hannawalton89"
+git add .
+git commit -m "Added generate button and transcript summary feature"
+git push origin main
+git config user.name "hannawalton89"
+git config user.email "mrshannawalton@gmail.com"
+git commit -m "Added transcript parser and summary button"
+git push origin main
