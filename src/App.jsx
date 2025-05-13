@@ -36,9 +36,10 @@ export default function App() {
       const lengthScore = Math.min(q.quote.length, 200) / 10;
       const sentenceCount = q.quote.split(/[.!?]/).filter(s => s.trim().length > 0).length;
 
-      const totalScore = (sentenceCount <= 3 && keywordScore > 0)
-        ? keywordScore + expBonus + lengthScore
-        : 0;
+      const totalScore =
+        (sentenceCount >= 1 && sentenceCount <= 3)
+          ? keywordScore + expBonus + lengthScore + (q.quote.trim().endsWith('.') ? 5 : 0)
+          : 0;
 
       return { ...q, score: totalScore };
     });
