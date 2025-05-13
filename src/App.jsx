@@ -12,27 +12,33 @@ export default function App() {
       .filter(line => line.includes(":"))
       .map(line => {
         const [name, content] = line.split(":");
-        return `💬 ${name.trim()}: "${content.trim()}"`;
+        return {
+          raw: `💬 ${name.trim()}: "${content.trim()}"`,
+          name: name.trim(),
+          quote: content.trim()
+        };
       });
 
-    const speakers = [...new Set(lines.map(line => line.split(":")[0]))].filter(Boolean);
+    const speakers = [...new Set(quotes.map(q => q.name))];
     const summary = `This ICON panel features insights from ${speakers.join(", ")}.`;
 
-    // Find the most impactful quote (longest one)
-    const bestQuoteLine = lines
-      .filter(line => line.includes(":"))
-      .map(line => {
-        const [name, content] = line.split(":");
-        return { name: name.trim(), quote: content.trim() };
-      })
-      .reduce((longest, current) => current.quote.length > longest.quote.length ? current : longest, { name: "", quote: "" });
+    const keywords = ["love", "learned", "important", "powerful", "truth", "change", "impact", "value"];
 
-    if (bestQuoteLine.name && bestQuoteLine.quote) {
-      setAgentName(bestQuoteLine.name);
-      setAgentQuote(bestQuoteLine.quote);
+    const scored = quotes.map(q => {
+      const keywordScore = keywords.reduce((score, word) =>
+        q.quote.toLowerCase().includes(word) ? score + 10 : score, 0);
+      const lengthScore = Math.min(q.quote.length, 200) / 10;
+      return { ...q, score: keywordScore + lengthScore };
+    });
+
+    const best = scored.reduce((a, b) => (a.score > b.score ? a : b), { name: "", quote: "", score: 0 });
+
+    if (best.name && best.quote) {
+      setAgentName(best.name);
+      setAgentQuote(best.quote);
     }
 
-    setOutput(`${summary}\n\n${quotes.join("\n")}`);
+    setOutput(`${summary}\n\n${quotes.map(q => q.raw).join("\n")}`);
   };
 
   return (
