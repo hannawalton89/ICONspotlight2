@@ -34,7 +34,12 @@ export default function App() {
         q.quote.toLowerCase().includes(word) ? score + 10 : score, 0);
       const expBonus = q.quote.toLowerCase().includes("exp") ? 15 : 0;
       const lengthScore = Math.min(q.quote.length, 200) / 10;
-      const totalScore = keywordScore + expBonus + lengthScore;
+      const sentenceCount = q.quote.split(/[.!?]/).filter(s => s.trim().length > 0).length;
+
+      const totalScore = (sentenceCount <= 3 && keywordScore > 0)
+        ? keywordScore + expBonus + lengthScore
+        : 0;
+
       return { ...q, score: totalScore };
     });
 
