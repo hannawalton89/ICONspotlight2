@@ -55,22 +55,3 @@ export default function App() {
     </div>
   );
 }
-git add .
-git commit -m "Added transcript processing and summary generation"
-git push origin main
-git config --global user.name "hannawalton89"
-git config --global user.email "mrshannawalton@gmail.com"
-git add .
-git commit -m "Added transcript parsing and summary generation"
-git push origin main
-git config --global user.name "hannawalton89"
-git config --global user.email "mrshannawalton@gmail.com"
-git config --global user.email "mrshannawalton@gmail.com
-git config --global user.name "hannawalton89"
-git add .
-git commit -m "Added generate button and transcript summary feature"
-git push origin main
-git config user.name "hannawalton89"
-git config user.email "mrshannawalton@gmail.com"
-git commit -m "Added transcript parser and summary button"
-git push origin main
