@@ -101,14 +101,7 @@ export default function App() {
         </button>
       </a>
 
-      <div style={{ marginTop: "1rem" }}>
-        <iframe
-          title="Canva Preview"
-          src={`https://www.canva.com/design/DAGnWB5FYV0/N24eGBKrTH0CwHIgmi8J0w/view?embed`}
-          style={{ width: "100%", height: "500px", border: "none", borderRadius: "8px" }}
-          allowFullScreen
-        />
-      </div>
+      
 
       <button
         onClick={() => {
