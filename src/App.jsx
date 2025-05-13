@@ -101,29 +101,14 @@ export default function App() {
         </button>
       </a>
 
-      
-
       <button
         onClick={() => {
-          const canvas = document.createElement("canvas");
-          const ctx = canvas.getContext("2d");
-          canvas.width = 800;
-          canvas.height = 400;
-          ctx.fillStyle = "#ffffff";
-          ctx.fillRect(0, 0, canvas.width, canvas.height);
-          ctx.fillStyle = "#111827";
-          ctx.font = "bold 24px Arial";
-          ctx.fillText(`"${agentQuote}"`, 40, 200);
-          ctx.font = "italic 18px Arial";
-          ctx.fillText(`- ${agentName}`, 40, 240);
-
-          const link = document.createElement("a");
-          link.download = "icon-quote.png";
-          link.href = canvas.toDataURL();
-          link.click();
+          navigator.clipboard.writeText(`${agentQuote}\n- ${agentName}`).then(() => {
+            alert("Quote copied to clipboard!");
+          });
         }}
         style={{
-          backgroundColor: "#f97316",
+          backgroundColor: "#f59e0b",
           color: "white",
           padding: "12px 20px",
           borderRadius: "6px",
@@ -132,7 +117,7 @@ export default function App() {
           border: "none"
         }}
       >
-        Download as Image
+        Copy Quote to Clipboard
       </button>
 
       <pre style={{ whiteSpace: "pre-wrap", background: "#f4f4f4", padding: "1rem", marginTop: "1rem" }}>
