@@ -7,7 +7,8 @@ export default function App() {
   const [agentQuote, setAgentQuote] = useState("");
 
   const handleGenerate = () => {
-    const lines = transcript.split("\n");
+    const lines = transcript.split("
+");
     const quotes = lines
       .filter(line => line.includes(":"))
       .map(line => {
@@ -31,14 +32,18 @@ export default function App() {
       return { ...q, score: keywordScore + lengthScore };
     });
 
-    const best = scored.reduce((a, b) => (a.score > b.score ? a : b), { name: "", quote: "", score: 0 });
+    const topQuotes = scored
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 3);
 
-    if (best.name && best.quote) {
-      setAgentName(best.name);
-      setAgentQuote(best.quote);
+    if (topQuotes.length > 0) {
+      setAgentName(topQuotes[0].name);
+      setAgentQuote(topQuotes[0].quote);
     }
 
-    setOutput(`${summary}\n\n${quotes.map(q => q.raw).join("\n")}`);
+    setOutput(`${summary}
+
+${topQuotes.map(q => q.raw).join("\n\n")}`);
   };
 
   return (
