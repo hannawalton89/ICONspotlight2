@@ -7,8 +7,8 @@ export default function App() {
   const [agentQuote, setAgentQuote] = useState("");
 
   const handleGenerate = () => {
-    const lines = transcript.split("\n"); // ✅ fixed newline syntax
-
+    const lines = transcript.split("
+");
     const quotes = lines
       .filter(line => line.includes(":"))
       .map(line => {
@@ -23,13 +23,19 @@ export default function App() {
     const speakers = [...new Set(quotes.map(q => q.name))];
     const summary = `This ICON panel features insights from ${speakers.join(", ")}.`;
 
-    const keywords = ["love", "learned", "important", "powerful", "truth", "change", "impact", "value"];
+    const keywords = [
+      "client", "closing", "leads", "buyers", "sellers", "team", "culture",
+      "ICON", "eXp", "referral", "listing", "mentor", "freedom", "collaboration",
+      "broker", "brand", "support", "value", "opportunity", "community"
+    ];
 
     const scored = quotes.map(q => {
       const keywordScore = keywords.reduce((score, word) =>
         q.quote.toLowerCase().includes(word) ? score + 10 : score, 0);
+      const expBonus = q.quote.toLowerCase().includes("exp") ? 15 : 0;
       const lengthScore = Math.min(q.quote.length, 200) / 10;
-      return { ...q, score: keywordScore + lengthScore };
+      const totalScore = keywordScore + expBonus + lengthScore;
+      return { ...q, score: totalScore };
     });
 
     const topQuotes = scored
@@ -41,7 +47,11 @@ export default function App() {
       setAgentQuote(topQuotes[0].quote);
     }
 
-    setOutput(`${summary}\n\n${topQuotes.map(q => q.raw).join("\n\n")}`);
+    setOutput(`${summary}
+
+${topQuotes.map(q => q.raw).join("
+
+")}`);
   };
 
   return (
