@@ -7,8 +7,8 @@ export default function App() {
   const [agentQuote, setAgentQuote] = useState("");
 
   const handleGenerate = () => {
-    const lines = transcript.split("
-");
+    const lines = transcript.split("\n"); // ✅ fixed newline
+
     const quotes = lines
       .filter(line => line.includes(":"))
       .map(line => {
@@ -53,11 +53,7 @@ export default function App() {
       setAgentQuote(topQuotes[0].quote);
     }
 
-    setOutput(`${summary}
-
-${topQuotes.map(q => q.raw).join("
-
-")}`);
+    setOutput(`${summary}\n\n${topQuotes.map(q => q.raw).join("\n\n")}`);
   };
 
   return (
@@ -151,4 +147,5 @@ ${topQuotes.map(q => q.raw).join("
     </div>
   );
 }
+
 
