@@ -94,7 +94,7 @@ ${topQuotes.map(q => q.raw).join("
       <button
         onClick={handleGenerate}
         style={{
-          backgroundColor: "#2563eb",
+          backgroundColor: "#002d74",
           color: "white",
           padding: "12px 20px",
           borderRadius: "6px",
@@ -113,7 +113,7 @@ ${topQuotes.map(q => q.raw).join("
       >
         <button
           style={{
-            backgroundColor: "#10b981",
+            backgroundColor: "#00a9e0",
             color: "white",
             padding: "12px 20px",
             borderRadius: "6px",
@@ -133,7 +133,7 @@ ${topQuotes.map(q => q.raw).join("
           });
         }}
         style={{
-          backgroundColor: "#f59e0b",
+          backgroundColor: "#ff7a59",
           color: "white",
           padding: "12px 20px",
           borderRadius: "6px",
@@ -151,3 +151,4 @@ ${topQuotes.map(q => q.raw).join("
     </div>
   );
 }
+
